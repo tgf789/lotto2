@@ -46,11 +46,12 @@ export default class RankingList extends Component{
                 <ul className="rankingList">
                 {rankingList.map((item,index) => 
                     <li key={`rk_${index}`}>
-                        <h3>{item['title']}</h3>
+                        <h3 className="rkTitle">{item['title']}</h3>
                         <hr/>
-                        <div>
+                        <div className="rkAnswerField">
                             <div>{item['answer']}</div>
                             <div>{item['subAnswer']}</div>
+                            
                         </div>
                     </li>)}
                 </ul>
