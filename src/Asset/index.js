@@ -1,0 +1,1 @@
+export const numberColor = ['#febc3d','#418fe6','#f83a24','#6f6f6f','#63b628','#5238ab']
