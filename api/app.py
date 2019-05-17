@@ -15,7 +15,7 @@ class RegexConverter(BaseConverter):
         self.regex = items[0]
 
 app = Flask(__name__)
-app.run(host='49.236.137.107', debug='True')
+
 app.url_map.converters['regex'] = RegexConverter
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
@@ -116,3 +116,6 @@ class GetLottoNoHistory(Resource):
 api.add_resource(GetRankingItems, '/getRankingItems')
 api.add_resource(GetLottoNoHistory, '/getLottoNoHistory')
 api.add_resource(GetCurrentLotto, '/<regex("[0-9]*"):epNo>')
+
+
+app.run(host='49.236.137.107', debug='True')
