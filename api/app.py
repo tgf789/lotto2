@@ -26,7 +26,7 @@ api = Api(app)
 
 class DBConn():
     def __init__(self):
-        connString = "host='localhost' dbname='tgf789' user='tgf789' "
+        connString = "host='localhost' dbname='tgf789' user='tgf789' password='1234'"
         self.conn = psycopg2.connect(connString)
         self.cur = self.conn.cursor(cursor_factory=psycopg2.extras.DictCursor)  # 딕셔너리 모드
 
