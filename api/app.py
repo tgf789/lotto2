@@ -117,5 +117,5 @@ api.add_resource(GetRankingItems, '/getRankingItems')
 api.add_resource(GetLottoNoHistory, '/getLottoNoHistory')
 api.add_resource(GetCurrentLotto, '/<regex("[0-9]*"):epNo>')
 
-
-app.run(host='0.0.0.0', debug='True')
+if __name__ == '__main__':
+    app.run(host="0.0.0.0", port="5000", debug=True)
