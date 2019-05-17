@@ -118,4 +118,4 @@ api.add_resource(GetLottoNoHistory, '/getLottoNoHistory')
 api.add_resource(GetCurrentLotto, '/<regex("[0-9]*"):epNo>')
 
 
-app.run(host='49.236.137.107', debug='True')
+app.run(host='0.0.0.0', debug='True')
