@@ -15,7 +15,7 @@ class RegexConverter(BaseConverter):
         self.regex = items[0]
 
 app = Flask(__name__)
-app.run(debug=True)
+app.run(host='49.236.137.107', debug='True')
 app.url_map.converters['regex'] = RegexConverter
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
