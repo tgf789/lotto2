@@ -69,8 +69,6 @@ export default class NumberChart extends Component{
             }
         });
 
-
-        
         console.log()
     }
 
