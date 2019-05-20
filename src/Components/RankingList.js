@@ -18,7 +18,7 @@ export default class RankingList extends Component{
     }
 
     callRankingItems = () => {
-        axios.get('http://localhost:5000/getRankingItems')
+        axios.get('http://49.236.137.107:5000/getRankingItems')
         .then((response) => {
             if(response.status !== 200) throw Error(response.status + ' Error')
             if(response.data.result !== 'success') Error('data error')
@@ -51,7 +51,7 @@ export default class RankingList extends Component{
                         <div className="rkAnswerField">
                             <div>{item['answer']}</div>
                             <div>{item['subAnswer']}</div>
-                            
+
                         </div>
                     </li>)}
                 </ul>
