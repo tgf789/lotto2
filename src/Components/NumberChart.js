@@ -17,7 +17,6 @@ export default class NumberChart extends Component{
         console.log('...')
         axios.get('http://49.236.137.107:5000/getLottoNoHistory?order=cnt&by=desc')
         .then((response) => {
-            
             if(response.status !== 200) throw Error(response.status + ' Error')
             if(response.data.result !== 'success') Error('data error')
             if(!response.data.responseData) Error('DB data Error')
