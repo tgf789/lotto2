@@ -112,7 +112,6 @@ class GetLottoNoHistory(Resource):
         finally :
             db.conn.close()
 
-   
 
 api.add_resource(GetRankingItems, '/getRankingItems')
 api.add_resource(GetLottoNoHistory, '/getLottoNoHistory')
