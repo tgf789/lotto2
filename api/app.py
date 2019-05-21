@@ -9,39 +9,38 @@ from flask_cors import CORS # CORS 이슈
 
 import json
 
-class RegexConverter(BaseConverter):
+class RegexConverter(BaseConverter):        # URL 내에 있는 정규식 치환
     def __init__(self, url_map, *items):
         super(RegexConverter, self).__init__(url_map)
         self.regex = items[0]
 
-app = Flask(__name__)
+app = Flask(__name__)                       # flask
 
-app.url_map.converters['regex'] = RegexConverter
-cors = CORS(app, resources={r"/*": {"origins": "*"}})
-
+app.url_map.converters['regex'] = RegexConverter    # 정규식 적용
+cors = CORS(app, resources={r"/*": {"origins": "*"}})   # CORS 이슈
 
 api = Api(app)
 
 #============================================
 
-class DBConn():
-    def __init__(self):
+class DBConn():         # DB 연결
+    def __init__(self):     # 생성자
         connString = "host='localhost' dbname='tgf789' user='tgf789' password='1234'"
         self.conn = psycopg2.connect(connString)
         self.cur = self.conn.cursor(cursor_factory=psycopg2.extras.DictCursor)  # 딕셔너리 모드
 
-    def select(self,query, data = []):
+    def select(self,query, data = []):      # row가 2개 이상 결과인 셀렉트
         self.cur.execute(query,data)
-        return self.cur.fetchall()
+        return self.cur.fetchall()          # 여러개 인출
 
-    def selectOne(self,query, data = []):
+    def selectOne(self,query, data = []):   # row가 1개인 셀렉트
         self.cur.execute(query,data)
-        return self.cur.fetchone()
+        return self.cur.fetchone()          # 한개 인출
 
     def close(self):
         self.conn.close()
 
-def requestArgs(args):
+def requestArgs(args):                      # URL 파라미터 가져오기 args = ['order','by']
     parser = reqparse.RequestParser()
     for arg in args :
         parser.add_argument(arg)
@@ -49,8 +48,8 @@ def requestArgs(args):
 
 #============================================
 
-class GetRankingItems(Resource):
-    def get(self):
+class GetRankingItems(Resource):            # 각종 랭킹 아이템 만들기
+    def get(self):                          # Method GET
         try:
             db = DBConn()
 
@@ -68,11 +67,11 @@ class GetRankingItems(Resource):
         except Exception as e :
             return {'result' : 'error', 'errorBody' : str(e)}
 
-class GetCurrentLotto(Resource):
+class GetCurrentLotto(Resource):            # 해당하는 회차 결과 가져오기. 빈값이면 가장 최근꺼
     def get(self,epNo):
         try:
             db = DBConn()
-            if not epNo or epNo == "0" :
+            if not epNo or epNo == "0" :    # 빈값이면 최근꺼
                 where = ''
             else : 
                 where = ' where episode_no='+epNo 
@@ -84,7 +83,7 @@ class GetCurrentLotto(Resource):
         except Exception as e:
             return {'result': 'error', 'errorBody' : str(e)}
 
-class GetLottoNoHistory(Resource):
+class GetLottoNoHistory(Resource):          # 가장 많이 나온 숫자 순대로 정렬하기
     def get(self):
         try:
             args = requestArgs(['order','by'])
@@ -113,9 +112,9 @@ class GetLottoNoHistory(Resource):
             db.conn.close()
 
 
-api.add_resource(GetRankingItems, '/getRankingItems')
+api.add_resource(GetRankingItems, '/getRankingItems')           # path 추가
 api.add_resource(GetLottoNoHistory, '/getLottoNoHistory')
-api.add_resource(GetCurrentLotto, '/<regex("[0-9]*"):epNo>')
+api.add_resource(GetCurrentLotto, '/<regex("[0-9]*"):epNo>')    # [0-9] 형태의 0개 이상을 epNo에 담기
 
 
 
