@@ -51,6 +51,10 @@ def requestArgs(args):                      # URL 파라미터 가져오기 args
 
 #============================================
 
+class hello(Resource):            # 테스트용
+    def get(self):                          # Method GET
+        return {'result' : 'hello'}
+
 class GetRankingItems(Resource):            # 각종 랭킹 아이템 만들기
     def get(self):                          # Method GET
         try:
@@ -118,6 +122,7 @@ class GetLottoNoHistory(Resource):          # 가장 많이 나온 숫자 순대
 api.add_resource(GetRankingItems, '/getRankingItems')           # path 추가
 api.add_resource(GetLottoNoHistory, '/getLottoNoHistory')
 api.add_resource(GetCurrentLotto, '/<regex("[0-9]*"):epNo>')    # [0-9] 형태의 0개 이상을 epNo에 담기
+api.add_resource(hello, '/hello')
 
 
 
