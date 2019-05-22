@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-  
+# 인코딩 설정 
+
 from flask import Flask     # 웹서버 구축 플라스크
 import psycopg2             # DB연결
 import psycopg2.extras      # 쿼리 결과를 dict형으로 변환하기 위함
