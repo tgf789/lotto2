@@ -118,5 +118,5 @@ api.add_resource(GetCurrentLotto, '/<regex("[0-9]*"):epNo>')    # [0-9] 형태�
 
 
 
-if __name__ == '__main__':
-    app.run(host="10.41.15.152", port="5000", debug=True, use_reloader=False)
+# if __name__ == '__main__':
+app.run(host="10.41.15.152", port="5000", debug=True, use_reloader=False)
