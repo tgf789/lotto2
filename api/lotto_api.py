@@ -53,7 +53,7 @@ def requestArgs(args):                      # URL 파라미터 가져오기 args
 
 class hello(Resource):            # 테스트용
     def get(self):                          # Method GET
-        return {'result' : 'hello10'}
+        return {'result' : 'hello11'}
 
 class GetRankingItems(Resource):            # 각종 랭킹 아이템 만들기
     def get(self):                          # Method GET
