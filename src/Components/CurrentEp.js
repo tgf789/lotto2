@@ -1,7 +1,8 @@
 import React,{Component} from 'react'
 import axios from 'axios'
 import cx from 'classnames'
-import AnimatedNumber from 'react-animated-number';
+import AnimatedNumber from 'react-animated-number'
+import Loading from './Loading'
 
 import {numberColor} from '../Asset'
 import {formatMoney} from '../Util/'
@@ -18,7 +19,8 @@ export default class CurrentEp extends Component{
             epNoInput : "0",
             displayEpInputDialog: false,
             maxEpNo : -1,
-            errMsg : ""
+            errMsg : "",
+            isLoading : true,
         }
 
     }
@@ -43,7 +45,8 @@ export default class CurrentEp extends Component{
                 winnersCount : responseData['winners_co'],
                 epNo : responseData['episode_no'],
                 epNoInput : responseData['episode_no'],
-                no : [responseData['no1'],responseData['no2'],responseData['no3'],responseData['no4'],responseData['no5'],responseData['no6'],responseData['no7']]
+                no : [responseData['no1'],responseData['no2'],responseData['no3'],responseData['no4'],responseData['no5'],responseData['no6'],responseData['no7']],
+                isLoading : false
             })
 
             if(this.state.maxEpNo === -1) this.setState({maxEpNo : responseData['episode_no']})
@@ -84,7 +87,7 @@ export default class CurrentEp extends Component{
     }
 
     render(){
-        const {totalReward,personalReward,winnersCount,epNo,no,epNoInput,displayEpInputDialog,errMsg} = this.state
+        const {totalReward,personalReward,winnersCount,epNo,no,epNoInput,displayEpInputDialog,errMsg,isLoading} = this.state
         const animatedStyle = (fontSize = 48) => ({
             style:{
                 transition: '0.8s ease-out',
@@ -95,6 +98,7 @@ export default class CurrentEp extends Component{
         })
         return(
             <div className="cc">
+                {isLoading ? <Loading/> :
                 <div className="cardContainer">
                     <p><strong className="epNo" onClick={()=>this.epDialogSwitch(true)}>{epNo}</strong> 회차 당첨번호</p>
                     <p>
@@ -114,6 +118,7 @@ export default class CurrentEp extends Component{
                     
                     </p>
                 </div>
+                }
 
 
                 {displayEpInputDialog && 
