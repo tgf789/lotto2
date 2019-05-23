@@ -16,10 +16,15 @@ connString = "host='localhost' dbname='tgf789' user='tgf789' "
 conn = psycopg2.connect(connString)
 cur = conn.cursor()
 
-for i in range(1,859) :
+
+cur.execute('select episode_no from lotto order by episode_no desc limit 1')
+recentNo = cur.fetchone()
+
+for i in range(recentNo[0],recentNo[0]+10) :
     time.sleep(1)
     print ("---"+str(i)+"....\n")
     result = get_request_by_episode(i)
+    print(result)
     if result['returnValue'] == "fail" :
         print ("============="+str(i)+" 번째에서 FAIL==============")
         break
@@ -31,4 +36,5 @@ for i in range(1,859) :
 
 conn.commit()
 conn.close()
+print('종료')
 
