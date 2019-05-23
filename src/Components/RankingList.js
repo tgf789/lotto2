@@ -18,7 +18,7 @@ export default class RankingList extends Component{
     }
 
     callRankingItems = () => {
-        axios.get('http://49.236.137.107:5001/getRankingItems')
+        axios.get('http://49.236.137.107:5000/getRankingItems')
         .then((response) => {
             if(response.status !== 200) throw Error(response.status + ' Error')
             if(response.data.result !== 'success') Error('data error')

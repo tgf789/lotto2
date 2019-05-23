@@ -29,7 +29,7 @@ export default class CurrentEp extends Component{
     }
 
     callEpNumbers = () => {
-        axios.get('http://49.236.137.107:5001/'+this.state.epNo)
+        axios.get('http://49.236.137.107:5000/'+this.state.epNo)
         .then((response) => {
             if(response.status !== 200) throw Error(response.status + ' Error')
             if(response.data.result !== 'success') Error('data error')
