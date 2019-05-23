@@ -126,5 +126,5 @@ api.add_resource(hello, '/hello')
 
 
 
-# if __name__ == '__main__':
-app.run(host="10.41.15.152",port=5001, debug=True, use_reloader=False)
+if __name__ == '__main__':
+    app.run(host="10.41.15.152",port=5001, debug=True, use_reloader=True)
